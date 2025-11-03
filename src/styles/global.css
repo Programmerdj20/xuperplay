@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Theme customization - Inspired by xupertv.com */
+@theme {
+  /* Color palette - Blue-Purple gradient scheme */
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-secondary-500: #513ca4;
+  --color-secondary-600: #4c1d95;
+
+  /* Neutral colors */
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f7f8f9;
+  --color-gray-900: #111827;
+
+  /* Font family */
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Custom gradient utilities */
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-secondary-500) 100%);
+  }
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-gray-900);
+}

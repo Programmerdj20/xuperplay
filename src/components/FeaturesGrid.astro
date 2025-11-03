@@ -1,0 +1,119 @@
+---
+import {
+  Tv,
+  Smartphone,
+  Zap,
+  Shield,
+  Download,
+  Globe,
+  Clock,
+  Star,
+  Wifi,
+} from 'lucide-astro';
+
+const features = [
+  {
+    icon: Tv,
+    title: 'Miles de Canales',
+    description:
+      'Accede a una amplia variedad de canales en vivo de todo el mundo, deportes, películas, series y más.',
+  },
+  {
+    icon: Smartphone,
+    title: 'Multi-Dispositivo',
+    description:
+      'Compatible con Smart TV, Android, iOS, tablets y más. Lleva tu entretenimiento a todos tus dispositivos.',
+  },
+  {
+    icon: Zap,
+    title: 'Streaming Ultra Rápido',
+    description:
+      'Tecnología de streaming optimizada para carga instantánea y reproducción sin interrupciones.',
+  },
+  {
+    icon: Shield,
+    title: 'Seguro y Confiable',
+    description:
+      'Protección avanzada de datos y conexión segura para tu tranquilidad mientras disfrutas.',
+  },
+  {
+    icon: Download,
+    title: 'Contenido Offline',
+    description:
+      'Descarga tus programas favoritos y disfrútalos sin conexión a internet cuando quieras.',
+  },
+  {
+    icon: Globe,
+    title: 'Contenido Internacional',
+    description:
+      'Canales y contenido de múltiples países en diferentes idiomas. Entretenimiento global.',
+  },
+  {
+    icon: Clock,
+    title: 'EPG Completo',
+    description:
+      'Guía electrónica de programación con horarios actualizados de todos tus canales favoritos.',
+  },
+  {
+    icon: Star,
+    title: 'Calidad Premium',
+    description:
+      'Streaming en HD, Full HD y 4K. Disfruta de la mejor calidad de imagen y sonido.',
+  },
+  {
+    icon: Wifi,
+    title: 'Bajo Consumo de Datos',
+    description:
+      'Optimizado para consumir menos datos sin sacrificar calidad. Perfecto para conexiones móviles.',
+  },
+];
+---
+
+<section id="caracteristicas" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16 max-w-3xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Características <span class="gradient-primary bg-clip-text text-transparent">Increíbles</span>
+      </h2>
+      <p class="text-lg md:text-xl text-gray-600">
+        Todo lo que necesitas para disfrutar del mejor entretenimiento digital en un solo lugar
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature) => {
+        const Icon = feature.icon;
+        return (
+          <div class="group bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            {/* Icon */}
+            <div class="mb-6 inline-flex p-4 rounded-lg gradient-primary">
+              <Icon size={32} class="text-white" />
+            </div>
+
+            {/* Title */}
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              {feature.title}
+            </h3>
+
+            {/* Description */}
+            <p class="text-gray-600 leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center mt-16">
+      <a
+        href="#descargar"
+        class="inline-block px-8 py-4 gradient-primary text-white rounded-lg font-bold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+      >
+        Probar Gratis Ahora
+      </a>
+    </div>
+  </div>
+</section>
