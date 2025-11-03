@@ -1,5 +1,7 @@
 ---
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-astro';
+import { Image } from 'astro:assets';
+import logoImage from '../assets/images/logos/Xuper_play_logo.webp';
 
 const currentYear = new Date().getFullYear();
 
@@ -39,9 +41,7 @@ const socialLinks = [
       <!-- Brand Section -->
       <div class="lg:col-span-2">
         <div class="mb-6">
-          <h3 class="text-3xl font-bold gradient-primary bg-clip-text text-transparent">
-            XuperPlay
-          </h3>
+          <Image src={logoImage} alt="XuperPlay" class="h-12 w-auto mb-4" loading="lazy" />
           <p class="text-gray-400 mt-4 leading-relaxed">
             Tu plataforma de streaming favorita con miles de canales en vivo, películas, series y contenido on-demand. Entretenimiento sin límites, donde quieras, cuando quieras.
           </p>

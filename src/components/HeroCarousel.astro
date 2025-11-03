@@ -1,5 +1,16 @@
 ---
 import { ChevronLeft, ChevronRight, Play, Tv } from 'lucide-astro';
+import { Image } from 'astro:assets';
+
+// INSTRUCCIONES: Coloca tus imágenes en src/assets/images/hero/
+// Nombres recomendados: slide-1.jpg, slide-2.jpg, slide-3.jpg
+// Formatos soportados: JPG, PNG, WebP (se convertirán automáticamente a WebP/AVIF)
+// Tamaño recomendado: 1920x1080px o superior
+
+// Importa tus imágenes aquí (descomenta cuando tengas las imágenes):
+// import slide1Image from '../assets/images/hero/slide-1.jpg';
+// import slide2Image from '../assets/images/hero/slide-2.jpg';
+// import slide3Image from '../assets/images/hero/slide-3.jpg';
 
 const slides = [
   {
@@ -7,21 +18,24 @@ const slides = [
     subtitle: 'Miles de canales y contenido on-demand al alcance de tu mano',
     cta: 'Comenzar Ahora',
     ctaLink: '#descargar',
-    image: 'slide-1',
+    // image: slide1Image, // Descomenta cuando tengas la imagen
+    icon: Tv,
   },
   {
     title: 'Calidad Premium en Todos tus Dispositivos',
     subtitle: 'Disfruta de streaming en HD y 4K donde quieras, cuando quieras',
     cta: 'Ver Características',
     ctaLink: '#caracteristicas',
-    image: 'slide-2',
+    // image: slide2Image, // Descomenta cuando tengas la imagen
+    icon: Play,
   },
   {
     title: 'Fácil de Instalar y Usar',
     subtitle: 'Configura tu aplicación en minutos y comienza a disfrutar',
     cta: 'Guía de Instalación',
     ctaLink: '#instalacion',
-    image: 'slide-3',
+    // image: slide3Image, // Descomenta cuando tengas la imagen
+    icon: Tv,
   },
 ];
 ---
@@ -34,19 +48,32 @@ const slides = [
         class={`carousel-slide absolute inset-0 transition-opacity duration-700 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
         data-slide={index}
       >
-        {/* Background with gradient overlay */}
-        <div class="absolute inset-0 gradient-primary opacity-90" />
+        {/* Background Image (cuando esté disponible) */}
+        {slide.image && (
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            width={1920}
+            height={1080}
+            class="absolute inset-0 w-full h-full object-cover"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            quality={85}
+          />
+        )}
+
+        {/* Gradient overlay para legibilidad del texto */}
+        <div class={`absolute inset-0 ${slide.image ? 'bg-gradient-to-b from-gray-900/70 via-gray-900/60 to-gray-900/80' : 'gradient-primary opacity-90'}`} />
 
         {/* Content */}
         <div class="relative h-full flex items-center justify-center">
           <div class="container mx-auto px-4 text-center text-white">
             <div class="max-w-4xl mx-auto space-y-8">
-              {/* Icon */}
-              <div class="flex justify-center mb-6">
-                {index === 0 && <Tv size={64} class="animate-pulse" />}
-                {index === 1 && <Play size={64} class="animate-pulse" />}
-                {index === 2 && <Tv size={64} class="animate-pulse" />}
-              </div>
+              {/* Icon (solo se muestra si no hay imagen de fondo) */}
+              {!slide.image && slide.icon && (
+                <div class="flex justify-center mb-6">
+                  <slide.icon size={64} class="animate-pulse" />
+                </div>
+              )}
 
               {/* Title */}
               <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">

@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+  quality?: number;
+  format?: 'webp' | 'avif' | 'png' | 'jpg';
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  loading = 'lazy',
+  class: className = '',
+  quality = 85,
+  format = 'webp',
+} = Astro.props;
+---
+
+<!--
+  Componente OptimizedImage
+
+  Wrapper del componente Image de Astro con configuraciones optimizadas por defecto.
+
+  USO:
+  ---
+  import OptimizedImage from '../components/OptimizedImage.astro';
+  import miImagen from '../assets/images/hero/foto.jpg';
+  ---
+
+  <OptimizedImage
+    src={miImagen}
+    alt="Descripción de la imagen"
+    width={1920}
+    height={1080}
+  />
+
+  CARACTERÍSTICAS:
+  - Conversión automática a WebP/AVIF para mejor rendimiento
+  - Lazy loading por defecto (excepto si se especifica 'eager')
+  - Calidad optimizada al 85% por defecto
+  - Responsive y adaptable
+
+  PARÁMETROS:
+  - src: La imagen importada desde src/assets/images/
+  - alt: Texto alternativo (REQUERIDO para accesibilidad)
+  - width: Ancho de la imagen (opcional, se detecta automáticamente)
+  - height: Alto de la imagen (opcional, se detecta automáticamente)
+  - loading: 'lazy' (por defecto) o 'eager' (para imágenes above-the-fold)
+  - class: Clases CSS adicionales
+  - quality: Calidad de compresión 0-100 (por defecto 85)
+  - format: Formato de salida (por defecto 'webp')
+-->
+
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  class={className}
+  quality={quality}
+  format={format}
+/>
