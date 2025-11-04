@@ -1,5 +1,8 @@
 ---
-import { ChevronLeft, ChevronRight, Play, Tv } from 'lucide-astro';
+import ChevronLeft from './icons/ChevronLeft.astro';
+import ChevronRight from './icons/ChevronRight.astro';
+import Play from './icons/Play.astro';
+import Tv from './icons/Tv.astro';
 import { Image } from 'astro:assets';
 
 // INSTRUCCIONES: Coloca tus imágenes en src/assets/images/hero/
@@ -63,7 +66,7 @@ const slides = [
               class="absolute inset-0 w-full h-full object-cover"
               loading={index === 0 ? 'eager' : 'lazy'}
               fetchpriority={index === 0 ? 'high' : 'auto'}
-              widths={[640, 768, 1024, 1280, 1920]}
+              widths={[768, 1920]}
               sizes="100vw"
             />
           )}
@@ -113,7 +116,7 @@ const slides = [
                           alt={img.alt}
                           class="w-full h-full object-cover"
                           loading="lazy"
-                          widths={[80, 96, 144, 192]}
+                          widths={[96, 192]}
                           sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, (max-width: 1024px) 144px, 192px"
                         />
                       </div>

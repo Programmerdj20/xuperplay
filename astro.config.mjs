@@ -1,14 +1,17 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  // Desactivar procesamiento de imágenes en desarrollo para mejorar performance
+  // En producción se usará Sharp normalmente para optimización
+  image: {
+    service: passthroughImageService()
+  },
+
   vite: {
     plugins: [tailwindcss()],
-    optimizeDeps: {
-      include: ['lucide-astro'],
-    },
     server: {
       fs: {
         strict: false,
@@ -17,9 +20,7 @@ export default defineConfig({
     build: {
       rollupOptions: {
         output: {
-          manualChunks: {
-            'lucide': ['lucide-astro'],
-          },
+          manualChunks: {},
         },
       },
     },
