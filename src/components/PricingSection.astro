@@ -1,0 +1,153 @@
+---
+import { Check, Sparkles } from 'lucide-astro';
+
+const plans = [
+  {
+    name: '1 MES',
+    price: '9',
+    period: 'Paga cada mes',
+    featured: false,
+    badge: null,
+  },
+  {
+    name: '3 MESES',
+    price: '27',
+    period: 'Paga cada 3 meses',
+    featured: false,
+    badge: null,
+  },
+  {
+    name: '6 MESES',
+    price: '49',
+    period: '+ 1 MES GRATIS',
+    featured: true,
+    badge: 'Popular',
+  },
+  {
+    name: '12 MESES',
+    price: '87',
+    period: '+ 2 MESES GRATIS',
+    featured: false,
+    badge: 'Mejor Valor',
+  },
+];
+
+const features = [
+  '+ 1000 canales',
+  'Series + Películas',
+  'Calidad HD y FHD',
+  '3 pantallas',
+  'Paquete Premium',
+];
+
+// Función para generar el mensaje de WhatsApp
+const getWhatsAppUrl = (planName: string, price: string) => {
+  const message = encodeURIComponent(
+    `¡Hola! Me interesa el plan ${planName} de $${price}. ¿Podrían darme más información?`
+  );
+  return `https://wa.me/+573014034646?text=${message}`;
+};
+---
+
+<section id="planes" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16 max-w-3xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Nuestros Planes
+      </h2>
+      <p class="text-xl text-gray-600">
+        Selecciona un plan y obtén acceso a todo el contenido de FLUJO TV.
+      </p>
+    </div>
+
+    <!-- Pricing Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
+      {plans.map((plan) => (
+        <div
+          class={`relative bg-white rounded-2xl shadow-lg transition-all duration-300 overflow-hidden
+            ${plan.featured
+              ? 'border-2 border-primary lg:scale-105 shadow-2xl ring-4 ring-primary/10'
+              : 'border border-gray-200 hover:shadow-xl hover:-translate-y-1'
+            }`}
+        >
+          {/* Badge Popular */}
+          {plan.badge && (
+            <div class="absolute top-0 right-0 bg-gradient-primary text-white px-4 py-1 rounded-bl-2xl text-sm font-bold flex items-center gap-1">
+              <Sparkles size={14} />
+              {plan.badge}
+            </div>
+          )}
+
+          {/* Card Content */}
+          <div class="p-6 lg:p-8">
+            {/* Plan Name */}
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">
+              {plan.name}
+            </h3>
+
+            {/* Price */}
+            <div class="mb-4">
+              <div class="flex items-start gap-1">
+                <span class="text-2xl font-bold text-gray-900 mt-1">$</span>
+                <span class="text-5xl lg:text-6xl font-extrabold gradient-text">
+                  {plan.price}
+                </span>
+              </div>
+              <p class={`text-sm font-semibold mt-2 ${plan.featured ? 'text-primary' : 'text-gray-600'}`}>
+                {plan.period}
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div class="border-t border-gray-200 my-6"></div>
+
+            {/* Features List */}
+            <ul class="space-y-3 mb-8">
+              {features.map((feature) => (
+                <li class="flex items-center gap-3">
+                  <div class={`shrink-0 rounded-full p-1 ${plan.featured ? 'bg-primary' : 'bg-gray-200'}`}>
+                    <Check size={14} class={plan.featured ? 'text-white' : 'text-gray-600'} />
+                  </div>
+                  <span class="text-gray-700 text-sm lg:text-base">
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA Button */}
+            <a
+              href={getWhatsAppUrl(plan.name, plan.price)}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`block w-full text-center py-3 px-6 rounded-lg font-bold text-base transition-all duration-300
+                ${plan.featured
+                  ? 'gradient-primary text-white shadow-lg hover:shadow-xl hover:scale-105'
+                  : 'bg-gray-100 text-gray-900 hover:bg-gray-200 hover:shadow-md'
+                }`}
+            >
+              Solicitar
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Footer Message */}
+    <div class="text-center mt-12">
+      <p class="text-gray-600 text-sm md:text-base">
+        Todos los planes incluyen acceso completo sin restricciones
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gradient-text {
+    background: linear-gradient(135deg, #3b82f6 0%, #513ca4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
