@@ -25,6 +25,11 @@
 }
 
 /* Base styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Espacio para el navbar fijo */
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--color-gray-900);
