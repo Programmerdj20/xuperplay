@@ -6,5 +6,25 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['lucide-astro'],
+    },
+    server: {
+      fs: {
+        strict: false,
+      },
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'lucide': ['lucide-astro'],
+          },
+        },
+      },
+    },
+  },
+  experimental: {
+    optimizeHoistedScript: true,
   },
 });

@@ -10,6 +10,7 @@ const {
 } = Astro.props;
 
 import '../styles/global.css';
+import slide1Image from '../assets/images/hero/Herobg_1.webp';
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ import '../styles/global.css';
     <meta name="generator" content={Astro.generator} />
 
     <!-- Preload critical resources -->
-    <link rel="preload" href="/src/assets/images/hero/Herobg_1.webp" as="image" type="image/webp" />
+    <link rel="preload" href={slide1Image.src} as="image" type="image/webp" fetchpriority="high" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -34,21 +35,13 @@ import '../styles/global.css';
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
 
-    <!-- Google Fonts - Optimizado para carga rápida -->
+    <!-- Google Fonts - Optimizado con font-display swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
     />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
 
     <title>{title}</title>
   </head>
