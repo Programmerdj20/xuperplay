@@ -75,12 +75,12 @@ const baseFeatures = [
 
   <main class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
     <!-- Hero Section -->
-    <section class="pt-32 pb-12 bg-gradient-to-r from-primary-600 to-secondary-600">
+    <section class="pt-28 pb-8 sm:pt-32 sm:pb-12 bg-gradient-to-r from-primary-600 to-secondary-600">
       <div class="container mx-auto px-4 text-center">
-        <h1 class="text-3xl md:text-5xl font-bold text-white mb-3">
+        <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3">
           Completar tu Compra
         </h1>
-        <p class="text-lg text-white/90 max-w-2xl mx-auto">
+        <p class="text-base sm:text-lg text-white/90 max-w-2xl mx-auto">
           Estás a pocos pasos de disfrutar el mejor contenido de streaming
         </p>
 
@@ -107,7 +107,7 @@ const baseFeatures = [
     </section>
 
     <!-- Checkout Content -->
-    <section class="py-12">
+    <section class="py-8 sm:py-12">
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto lg:grid lg:grid-cols-12 lg:gap-8">
 
@@ -116,15 +116,18 @@ const baseFeatures = [
 
             <!-- Mobile Summary Bar -->
             <div class="lg:hidden">
-              <div class="bg-white rounded-xl shadow-md border border-gray-200 p-4">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <span class="text-xs text-gray-500">Plan seleccionado</span>
-                    <p class="font-bold text-gray-900" id="mobile-plan-name">1 MES</p>
-                  </div>
-                  <div class="text-right">
-                    <span class="text-xs text-gray-500">Total</span>
-                    <p class="text-xl font-extrabold gradient-text" id="mobile-plan-price">$9</p>
+              <div class="relative rounded-xl overflow-hidden shadow-md">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 opacity-[0.07]"></div>
+                <div class="relative bg-white/95 border border-blue-100 rounded-xl p-4">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Plan seleccionado</span>
+                      <p class="font-bold text-gray-900 text-sm" id="mobile-plan-name">1 MES</p>
+                    </div>
+                    <div class="text-right">
+                      <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Total</span>
+                      <p class="text-xl font-extrabold gradient-text" id="mobile-plan-price">$9</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -151,7 +154,7 @@ const baseFeatures = [
             </div>
 
             <!-- Paso 1: Tu Plan -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6" id="step-plan">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6" id="step-plan">
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
                   1
@@ -161,11 +164,11 @@ const baseFeatures = [
 
               {plans.map((plan) => (
                 <div class="plan-detail hidden" data-plan-id={plan.id}>
-                  <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-5 border border-blue-100">
+                  <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-3 sm:p-5 border border-blue-100">
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                       <div>
                         <div class="flex items-center gap-2 mb-1">
-                          <h3 class="text-2xl font-extrabold text-gray-900">{plan.name}</h3>
+                          <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">{plan.name}</h3>
                           {plan.badge && (
                             <span class="inline-flex items-center gap-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-2.5 py-0.5 rounded-full text-xs font-bold">
                               <Sparkles size={12} />
@@ -214,7 +217,7 @@ const baseFeatures = [
             </div>
 
             <!-- Paso 2: Tus Datos -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6" id="step-datos">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6" id="step-datos">
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
                   2
@@ -270,7 +273,7 @@ const baseFeatures = [
             </div>
 
             <!-- Paso 3: Pagar -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6" id="step-pagar">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6" id="step-pagar">
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
                   3
@@ -287,10 +290,10 @@ const baseFeatures = [
                   href={plan.mercadoPagoLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="mp-pay-button hidden items-center justify-center gap-3 w-full py-3 sm:py-4 bg-[#00b1ea] hover:bg-[#0095c8] text-white font-bold text-sm sm:text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+                  class="mp-pay-button hidden items-center justify-center gap-2 sm:gap-3 w-full py-3 sm:py-4 bg-[#00b1ea] hover:bg-[#0095c8] text-white font-bold text-sm sm:text-lg rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer"
                   data-plan-id={plan.id}
                 >
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.94s4.18 1.36 4.18 3.87c0 1.73-1.31 2.93-3.12 3.17z" />
                   </svg>
                   {/* USD button text */}
@@ -309,7 +312,7 @@ const baseFeatures = [
             </div>
 
             <!-- Paso 4: Confirmar -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 opacity-50 transition-opacity duration-300" id="step-confirmar">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6 opacity-50 transition-opacity duration-300" id="step-confirmar">
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
                   4
@@ -333,12 +336,12 @@ const baseFeatures = [
                 <button
                   id="whatsappBtn"
                   type="button"
-                  class="flex items-center justify-center gap-2 w-full py-4 gradient-primary text-white font-bold rounded-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer text-base"
+                  class="w-full py-3 sm:py-4 gradient-primary text-white font-bold rounded-xl hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer text-center text-sm sm:text-base"
                 >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5 inline-block align-middle mr-2" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                   </svg>
-                  Enviar comprobante por WhatsApp
+                  <span class="align-middle">Enviar comprobante por WhatsApp</span>
                 </button>
               </div>
             </div>
@@ -431,11 +434,11 @@ const baseFeatures = [
         </div>
 
         <!-- Selector de Planes Alternativo -->
-        <div class="max-w-6xl mx-auto mt-16" id="plan-selector">
-          <h3 class="text-2xl font-bold text-gray-900 text-center mb-8">
+        <div class="max-w-6xl mx-auto mt-10 sm:mt-16" id="plan-selector">
+          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 text-center mb-6 sm:mb-8">
             Cambiar Plan
           </h3>
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {plans.map((plan) => (
               <button
                 class="plan-select-btn bg-white rounded-xl border-2 border-gray-200 p-3 sm:p-5 text-left hover:border-blue-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
