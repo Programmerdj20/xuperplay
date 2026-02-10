@@ -6,7 +6,7 @@ const plans = [
   {
     id: '1-mes',
     name: '1 MES',
-    price: '9',
+    price: { usd: '9', cop: '36.000' },
     period: 'Paga cada mes',
     screens: 3,
     featured: false,
@@ -17,7 +17,7 @@ const plans = [
   {
     id: '3-meses',
     name: '3 MESES',
-    price: '27',
+    price: { usd: '27', cop: '108.000' },
     period: 'Paga cada 3 meses',
     screens: 3,
     featured: false,
@@ -28,24 +28,24 @@ const plans = [
   {
     id: '6-meses',
     name: '6 MESES',
-    price: '49',
+    price: { usd: '49', cop: '200.000' },
     period: '+ 1 MES GRATIS',
     screens: 4,
     featured: false,
     badge: 'Popular',
-    originalMonthly: '$9',
-    monthlyPrice: '$7',
+    originalMonthly: { usd: '$9', cop: '$36.000' },
+    monthlyPrice: { usd: '$7', cop: '$28.500' },
   },
   {
     id: '12-meses',
     name: '12 MESES',
-    price: '87',
+    price: { usd: '87', cop: '350.000' },
     period: '+ 2 MESES GRATIS',
     screens: 5,
     featured: true,
     badge: 'Mejor Valor',
-    originalMonthly: '$9',
-    monthlyPrice: '$6.2',
+    originalMonthly: { usd: '$9', cop: '$36.000' },
+    monthlyPrice: { usd: '$6.2', cop: '$25.000' },
   },
 ];
 
@@ -60,13 +60,33 @@ const baseFeatures = [
 <section id="planes" class="py-20 bg-white">
   <div class="container mx-auto px-4">
     <!-- Section Header -->
-    <div class="text-center mb-16 max-w-3xl mx-auto">
+    <div class="text-center mb-12 max-w-3xl mx-auto">
       <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
         Nuestros Planes
       </h2>
       <p class="text-xl text-gray-600">
         Selecciona un plan y obten acceso a todo el contenido de XUPER PLAY.
       </p>
+    </div>
+
+    <!-- Currency Toggle -->
+    <div class="flex justify-center mb-12">
+      <div class="inline-flex items-center bg-gray-100 rounded-full p-1 border border-gray-200" id="currency-toggle">
+        <button
+          type="button"
+          class="currency-btn gradient-primary text-white shadow-sm px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer"
+          data-currency="usd"
+        >
+          USD ($)
+        </button>
+        <button
+          type="button"
+          class="currency-btn text-gray-600 px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer"
+          data-currency="cop"
+        >
+          COP ($)
+        </button>
+      </div>
     </div>
 
     <!-- Pricing Grid -->
@@ -120,22 +140,41 @@ const baseFeatures = [
 
                 {/* Price */}
                 <div class="mb-4">
-                  <div class="flex items-start gap-1">
+                  {/* USD Price */}
+                  <div class="flex items-start gap-1 price-usd">
                     <span class={`text-2xl font-bold mt-1 ${plan.featured ? 'text-blue-300' : 'text-gray-900'}`}>$</span>
                     <span class={`text-5xl lg:text-6xl font-extrabold ${plan.featured ? 'featured-price-text' : 'gradient-text'}`}>
-                      {plan.price}
+                      {plan.price.usd}
                     </span>
                   </div>
+                  {/* COP Price */}
+                  <div class="flex items-start gap-1 price-cop hidden">
+                    <span class={`text-2xl font-bold mt-1 ${plan.featured ? 'text-blue-300' : 'text-gray-900'}`}>$</span>
+                    <span class={`text-3xl lg:text-4xl font-extrabold ${plan.featured ? 'featured-price-text' : 'gradient-text'}`}>
+                      {plan.price.cop}
+                    </span>
+                  </div>
+
                   <p
                     class={`text-sm font-semibold mt-2 ${plan.featured ? 'text-blue-300' : 'text-gray-600'}`}
                   >
                     {plan.period}
                   </p>
+
+                  {/* Monthly price breakdown - USD */}
                   {plan.originalMonthly && plan.monthlyPrice && (
-                    <p class={`text-xs mt-1 font-semibold ${plan.featured ? 'text-emerald-400' : 'text-green-600'}`}>
-                      <span class={`line-through ${plan.featured ? 'text-gray-500' : 'text-gray-400'}`}>{plan.originalMonthly}/mes</span>
+                    <p class={`price-usd text-xs mt-1 font-semibold ${plan.featured ? 'text-emerald-400' : 'text-green-600'}`}>
+                      <span class={`line-through ${plan.featured ? 'text-gray-500' : 'text-gray-400'}`}>{plan.originalMonthly.usd}/mes</span>
                       {' \u2192 '}
-                      <span>{plan.monthlyPrice}/mes</span>
+                      <span>{plan.monthlyPrice.usd}/mes</span>
+                    </p>
+                  )}
+                  {/* Monthly price breakdown - COP */}
+                  {plan.originalMonthly && plan.monthlyPrice && (
+                    <p class={`price-cop hidden text-xs mt-1 font-semibold ${plan.featured ? 'text-emerald-400' : 'text-green-600'}`}>
+                      <span class={`line-through ${plan.featured ? 'text-gray-500' : 'text-gray-400'}`}>{plan.originalMonthly.cop}/mes</span>
+                      {' \u2192 '}
+                      <span>{plan.monthlyPrice.cop}/mes</span>
                     </p>
                   )}
                 </div>
@@ -181,6 +220,7 @@ const baseFeatures = [
                 {/* CTA Button */}
                 <a
                   href={`/pago?plan=${plan.id}`}
+                  data-plan-cta={plan.id}
                   class={`block w-full text-center py-3 px-6 rounded-lg font-bold text-base transition-all duration-300 cursor-pointer
                   ${
                     plan.featured
@@ -205,6 +245,77 @@ const baseFeatures = [
     </div>
   </div>
 </section>
+
+<script>
+  function detectCurrency(): string {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return tz === 'America/Bogota' ? 'cop' : 'usd';
+  }
+
+  function getInitialCurrency(): string {
+    const stored = localStorage.getItem('xuperplay-currency');
+    if (stored === 'cop' || stored === 'usd') return stored;
+    return detectCurrency();
+  }
+
+  function setCurrency(currency: string) {
+    localStorage.setItem('xuperplay-currency', currency);
+
+    // Update toggle buttons
+    document.querySelectorAll('#currency-toggle .currency-btn').forEach((btn) => {
+      const el = btn as HTMLElement;
+      if (el.dataset.currency === currency) {
+        el.classList.add('gradient-primary', 'text-white', 'shadow-sm');
+        el.classList.remove('text-gray-600');
+      } else {
+        el.classList.remove('gradient-primary', 'text-white', 'shadow-sm');
+        el.classList.add('text-gray-600');
+      }
+    });
+
+    // Toggle price visibility
+    document.querySelectorAll('.price-usd').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (currency === 'usd') {
+        htmlEl.classList.remove('hidden');
+        htmlEl.classList.add('price-fade-in');
+      } else {
+        htmlEl.classList.add('hidden');
+        htmlEl.classList.remove('price-fade-in');
+      }
+    });
+
+    document.querySelectorAll('.price-cop').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (currency === 'cop') {
+        htmlEl.classList.remove('hidden');
+        htmlEl.classList.add('price-fade-in');
+      } else {
+        htmlEl.classList.add('hidden');
+        htmlEl.classList.remove('price-fade-in');
+      }
+    });
+
+    // Update CTA links with currency param
+    document.querySelectorAll<HTMLAnchorElement>('[data-plan-cta]').forEach((a) => {
+      const planId = a.dataset.planCta;
+      a.href = `/pago?plan=${planId}&currency=${currency}`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const currency = getInitialCurrency();
+    setCurrency(currency);
+
+    // Toggle click handlers
+    document.querySelectorAll('#currency-toggle .currency-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selected = (btn as HTMLElement).dataset.currency;
+        if (selected) setCurrency(selected);
+      });
+    });
+  });
+</script>
 
 <style>
   .gradient-text {

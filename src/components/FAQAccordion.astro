@@ -5,7 +5,7 @@ const faqs = [
   {
     question: '¿Qué es XuperPlay y cómo funciona?',
     answer:
-      'XuperPlay es una plataforma de streaming que te permite acceder a miles de canales en vivo, películas, series y contenido on-demand desde cualquier dispositivo Android. Solo necesitas descargar la app e iniciar sesión para comenzar a disfrutar.',
+      'XuperPlay es una plataforma de streaming que te permite acceder a miles de canales en vivo, películas, series y contenido on-demand desde cualquier dispositivo Android, iOS, Smart TV, PC, etc. Solo necesitas descargar la app e iniciar sesión para comenzar a disfrutar.',
   },
   {
     question: '¿En qué dispositivos puedo usar XuperPlay?',
@@ -30,29 +30,29 @@ const faqs = [
   {
     question: '¿Qué métodos de pago aceptan?',
     answer:
-      'Aceptamos pagos a través de Mercado Pago, donde puedes pagar con tarjeta de crédito, débito, PSE, efectivo en puntos autorizados y otros métodos disponibles en la plataforma.',
+      'Aceptamos pagos a través de Mercado Pago, donde puedes pagar con tarjeta de crédito, débito, PSE, efectivo en puntos autorizados y otros métodos como Paypal, Zelle y Global66, preguntale a un asesor por whatsapp.',
   },
   {
     question: '¿Cómo realizo mi pago?',
     answer:
-      'Es muy sencillo: 1) Haz clic en "Solicitar" en el plan que desees, 2) Realiza tu pago en Mercado Pago, 3) Completa el formulario con tus datos y envíanos el comprobante por WhatsApp. Tu servicio se activa en menos de 24 horas.',
+      'Es muy sencillo: 1) Haz clic en "Solicitar" en el plan que desees, 2) Realiza tu pago en Mercado Pago, 3) Completa el formulario con tus datos y envíanos el comprobante por WhatsApp. Tu servicio se activa inmediatamente.',
   },
   {
     question: '¿Cómo puedo cancelar mi suscripción?',
     answer:
-      'Puedes cancelar tu suscripción en cualquier momento. Solo escríbenos por WhatsApp y procesaremos tu solicitud. No hay penalizaciones ni cargos por cancelación.',
+      'No tienes que cancelar, ya que nuestro sistema cobra por adelantado, sino deseas continuar solo dejas de pagar y ya.',
   },
 ];
 
 const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((faq) => ({
-    "@type": "Question",
-    "name": faq.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.answer,
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
     },
   })),
 };

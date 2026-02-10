@@ -11,7 +11,7 @@ const plans = [
   {
     id: '1-mes',
     name: '1 MES',
-    price: 9,
+    price: { usd: '9', cop: '36.000' },
     screens: 3,
     period: 'Paga cada mes',
     months: 1,
@@ -23,7 +23,7 @@ const plans = [
   {
     id: '3-meses',
     name: '3 MESES',
-    price: 27,
+    price: { usd: '27', cop: '108.000' },
     screens: 3,
     period: 'Paga cada 3 meses',
     months: 3,
@@ -35,7 +35,7 @@ const plans = [
   {
     id: '6-meses',
     name: '6 MESES',
-    price: 49,
+    price: { usd: '49', cop: '200.000' },
     screens: 4,
     period: '+ 1 MES GRATIS',
     months: 6,
@@ -47,7 +47,7 @@ const plans = [
   {
     id: '12-meses',
     name: '12 MESES',
-    price: 87,
+    price: { usd: '87', cop: '350.000' },
     screens: 5,
     period: '+ 2 MESES GRATIS',
     months: 12,
@@ -83,6 +83,26 @@ const baseFeatures = [
         <p class="text-lg text-white/90 max-w-2xl mx-auto">
           Estás a pocos pasos de disfrutar el mejor contenido de streaming
         </p>
+
+        <!-- Currency Toggle (dark variant) -->
+        <div class="mt-5 flex justify-center">
+          <div class="inline-flex items-center bg-white/15 backdrop-blur-sm rounded-full p-1" id="currency-toggle">
+            <button
+              type="button"
+              class="currency-btn gradient-primary text-white shadow-sm px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer"
+              data-currency="usd"
+            >
+              USD ($)
+            </button>
+            <button
+              type="button"
+              class="currency-btn text-white/70 px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 cursor-pointer"
+              data-currency="cop"
+            >
+              COP ($)
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -94,13 +114,29 @@ const baseFeatures = [
           <!-- Columna Izquierda: Pasos -->
           <div class="lg:col-span-7 space-y-6 mb-8 lg:mb-0">
 
+            <!-- Mobile Summary Bar -->
+            <div class="lg:hidden">
+              <div class="bg-white rounded-xl shadow-md border border-gray-200 p-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <span class="text-xs text-gray-500">Plan seleccionado</span>
+                    <p class="font-bold text-gray-900" id="mobile-plan-name">1 MES</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-xs text-gray-500">Total</span>
+                    <p class="text-xl font-extrabold gradient-text" id="mobile-plan-price">$9</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Indicador de Pasos -->
             <div class="flex items-center justify-between mb-8 px-2">
               {['Plan', 'Datos', 'Pagar', 'Confirmar'].map((step, i) => (
                 <div class="flex items-center flex-1">
                   <div class="flex flex-col items-center">
                     <div
-                      class={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 step-circle ${i === 0 ? 'gradient-primary text-white shadow-md' : 'bg-gray-200 text-gray-500'}`}
+                      class={`w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-300 step-circle ${i === 0 ? 'gradient-primary text-white shadow-md' : 'bg-gray-200 text-gray-500'}`}
                       data-step={i + 1}
                     >
                       {i + 1}
@@ -108,7 +144,7 @@ const baseFeatures = [
                     <span class="text-xs mt-1 font-semibold text-gray-500 hidden sm:block">{step}</span>
                   </div>
                   {i < 3 && (
-                    <div class="flex-1 h-0.5 bg-gray-200 mx-2 step-line" data-step={i + 1} />
+                    <div class="flex-1 h-0.5 bg-gray-200 mx-1 sm:mx-2 step-line" data-step={i + 1} />
                   )}
                 </div>
               ))}
@@ -126,7 +162,7 @@ const baseFeatures = [
               {plans.map((plan) => (
                 <div class="plan-detail hidden" data-plan-id={plan.id}>
                   <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-5 border border-blue-100">
-                    <div class="flex items-start justify-between">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                       <div>
                         <div class="flex items-center gap-2 mb-1">
                           <h3 class="text-2xl font-extrabold text-gray-900">{plan.name}</h3>
@@ -139,21 +175,27 @@ const baseFeatures = [
                         </div>
                         <p class="text-sm text-gray-600 font-semibold">{plan.period}</p>
                       </div>
-                      <div class="text-right">
-                        <div class="flex items-start">
+                      <div class="sm:text-right">
+                        {/* USD Price */}
+                        <div class="flex items-start price-usd">
                           <span class="text-lg font-bold text-gray-700 mt-1">$</span>
-                          <span class="text-4xl font-extrabold gradient-text">{plan.price}</span>
+                          <span class="text-4xl font-extrabold gradient-text">{plan.price.usd}</span>
+                        </div>
+                        {/* COP Price */}
+                        <div class="flex items-start price-cop hidden">
+                          <span class="text-lg font-bold text-gray-700 mt-1">$</span>
+                          <span class="text-2xl sm:text-3xl font-extrabold gradient-text">{plan.price.cop}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div class="mt-4 flex flex-wrap gap-3">
-                      <span class="inline-flex items-center gap-1.5 text-sm text-gray-700 bg-white px-3 py-1 rounded-full border border-gray-200">
+                    <div class="mt-4 flex flex-wrap gap-2 sm:gap-3">
+                      <span class="inline-flex items-center gap-1.5 text-xs sm:text-sm text-gray-700 bg-white px-2 sm:px-3 py-1 rounded-full border border-gray-200">
                         <Check size={14} class="text-green-600" />
                         {plan.screens} pantallas
                       </span>
                       {baseFeatures.slice(0, 2).map((feature) => (
-                        <span class="inline-flex items-center gap-1.5 text-sm text-gray-700 bg-white px-3 py-1 rounded-full border border-gray-200">
+                        <span class="inline-flex items-center gap-1.5 text-xs sm:text-sm text-gray-700 bg-white px-2 sm:px-3 py-1 rounded-full border border-gray-200">
                           <Check size={14} class="text-green-600" />
                           {feature}
                         </span>
@@ -245,14 +287,16 @@ const baseFeatures = [
                   href={plan.mercadoPagoLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="mp-pay-button hidden items-center justify-center gap-3 w-full py-4 bg-[#00b1ea] hover:bg-[#0095c8] text-white font-bold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+                  class="mp-pay-button hidden items-center justify-center gap-3 w-full py-3 sm:py-4 bg-[#00b1ea] hover:bg-[#0095c8] text-white font-bold text-sm sm:text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer"
                   data-plan-id={plan.id}
-                  data-plan-price={plan.price}
                 >
-                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.94s4.18 1.36 4.18 3.87c0 1.73-1.31 2.93-3.12 3.17z" />
                   </svg>
-                  Pagar ${plan.price} con Mercado Pago
+                  {/* USD button text */}
+                  <span class="price-usd">Pagar ${plan.price.usd} con Mercado Pago</span>
+                  {/* COP button text */}
+                  <span class="price-cop hidden">Pagar ${plan.price.cop} con Mercado Pago</span>
                 </a>
               ))}
 
@@ -300,8 +344,8 @@ const baseFeatures = [
             </div>
           </div>
 
-          <!-- Columna Derecha: Resumen (sticky) -->
-          <div class="lg:col-span-5">
+          <!-- Columna Derecha: Resumen (sticky, solo desktop) -->
+          <div class="hidden lg:block lg:col-span-5">
             <div class="lg:sticky lg:top-24 space-y-6">
 
               <!-- Resumen de Compra -->
@@ -335,7 +379,10 @@ const baseFeatures = [
                         <div class="border-t border-gray-200 pt-3 mt-3">
                           <div class="flex justify-between items-center">
                             <span class="text-lg font-bold text-gray-900">Total</span>
-                            <span class="text-3xl font-extrabold gradient-text">${plan.price}</span>
+                            <div>
+                              <span class="price-usd text-3xl font-extrabold gradient-text">${plan.price.usd}</span>
+                              <span class="price-cop hidden text-2xl font-extrabold gradient-text">${plan.price.cop}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -388,25 +435,33 @@ const baseFeatures = [
           <h3 class="text-2xl font-bold text-gray-900 text-center mb-8">
             Cambiar Plan
           </h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {plans.map((plan) => (
               <button
-                class="plan-select-btn bg-white rounded-xl border-2 border-gray-200 p-5 text-left hover:border-blue-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                class="plan-select-btn bg-white rounded-xl border-2 border-gray-200 p-3 sm:p-5 text-left hover:border-blue-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
                 data-plan-id={plan.id}
               >
                 <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-bold text-gray-900">{plan.name}</h4>
+                  <h4 class="font-bold text-gray-900 text-sm sm:text-base">{plan.name}</h4>
                   {plan.badge && (
-                    <span class="text-[10px] font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white px-2 py-0.5 rounded-full">
+                    <span class="text-[10px] font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white px-2 py-0.5 rounded-full hidden sm:inline">
                       {plan.badge}
                     </span>
                   )}
                 </div>
                 <div class="flex items-baseline gap-1">
-                  <span class="text-sm font-bold text-gray-600">$</span>
-                  <span class="text-3xl font-extrabold gradient-text">{plan.price}</span>
+                  {/* USD Price */}
+                  <div class="price-usd flex items-baseline gap-1">
+                    <span class="text-sm font-bold text-gray-600">$</span>
+                    <span class="text-2xl sm:text-3xl font-extrabold gradient-text">{plan.price.usd}</span>
+                  </div>
+                  {/* COP Price */}
+                  <div class="price-cop hidden flex items-baseline gap-1">
+                    <span class="text-sm font-bold text-gray-600">$</span>
+                    <span class="text-lg sm:text-xl font-extrabold gradient-text">{plan.price.cop}</span>
+                  </div>
                 </div>
-                <p class="text-xs text-gray-500 mt-1">{plan.screens} pantallas &middot; {plan.period}</p>
+                <p class="text-[10px] sm:text-xs text-gray-500 mt-1">{plan.screens} pantallas &middot; {plan.period}</p>
               </button>
             ))}
           </div>
@@ -419,20 +474,98 @@ const baseFeatures = [
 </MainLayout>
 
 <script>
-  // Datos de planes (duplicados en JS para manipulación del lado del cliente)
+  // Datos de planes con precios duales
   const plansData = [
-    { id: '1-mes', name: '1 MES', price: 9, screens: 3 },
-    { id: '3-meses', name: '3 MESES', price: 27, screens: 3 },
-    { id: '6-meses', name: '6 MESES', price: 49, screens: 4 },
-    { id: '12-meses', name: '12 MESES', price: 87, screens: 5 },
+    { id: '1-mes', name: '1 MES', price: { usd: '$9', cop: '$36.000' }, screens: 3 },
+    { id: '3-meses', name: '3 MESES', price: { usd: '$27', cop: '$108.000' }, screens: 3 },
+    { id: '6-meses', name: '6 MESES', price: { usd: '$49', cop: '$200.000' }, screens: 4 },
+    { id: '12-meses', name: '12 MESES', price: { usd: '$87', cop: '$350.000' }, screens: 5 },
   ];
 
   let currentPlan = '1-mes';
+  let currentCurrency = 'usd';
   let paymentClicked = false;
 
   function getQueryParam(param: string): string | null {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
+  }
+
+  function detectCurrency(): string {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return tz === 'America/Bogota' ? 'cop' : 'usd';
+  }
+
+  function getInitialCurrency(): string {
+    // 1. Query param (viene de PricingSection)
+    const paramCurrency = getQueryParam('currency');
+    if (paramCurrency === 'cop' || paramCurrency === 'usd') return paramCurrency;
+
+    // 2. localStorage
+    const stored = localStorage.getItem('xuperplay-currency');
+    if (stored === 'cop' || stored === 'usd') return stored;
+
+    // 3. Auto-detección timezone
+    return detectCurrency();
+  }
+
+  function setCurrency(currency: string) {
+    currentCurrency = currency;
+    localStorage.setItem('xuperplay-currency', currency);
+
+    // Update toggle buttons
+    document.querySelectorAll('#currency-toggle .currency-btn').forEach((btn) => {
+      const el = btn as HTMLElement;
+      if (el.dataset.currency === currency) {
+        el.classList.add('gradient-primary', 'text-white', 'shadow-sm');
+        el.classList.remove('text-gray-600', 'text-white/70');
+      } else {
+        el.classList.remove('gradient-primary', 'text-white', 'shadow-sm');
+        el.classList.add('text-white/70');
+      }
+    });
+
+    // Toggle price visibility
+    document.querySelectorAll('.price-usd').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (currency === 'usd') {
+        htmlEl.classList.remove('hidden');
+        htmlEl.classList.add('price-fade-in');
+      } else {
+        htmlEl.classList.add('hidden');
+        htmlEl.classList.remove('price-fade-in');
+      }
+    });
+
+    document.querySelectorAll('.price-cop').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (currency === 'cop') {
+        htmlEl.classList.remove('hidden');
+        htmlEl.classList.add('price-fade-in');
+      } else {
+        htmlEl.classList.add('hidden');
+        htmlEl.classList.remove('price-fade-in');
+      }
+    });
+
+    // Update mobile summary price
+    updateMobileSummary();
+
+    // Update URL
+    history.replaceState(null, '', `?plan=${currentPlan}&currency=${currency}`);
+  }
+
+  function updateMobileSummary() {
+    const plan = plansData.find((p) => p.id === currentPlan);
+    if (!plan) return;
+
+    const nameEl = document.getElementById('mobile-plan-name');
+    const priceEl = document.getElementById('mobile-plan-price');
+
+    if (nameEl) nameEl.textContent = plan.name;
+    if (priceEl) {
+      priceEl.textContent = currentCurrency === 'usd' ? plan.price.usd : plan.price.cop;
+    }
   }
 
   function selectPlan(planId: string) {
@@ -486,8 +619,11 @@ const baseFeatures = [
       }
     });
 
+    // Actualizar mobile summary
+    updateMobileSummary();
+
     // Actualizar URL sin recargar
-    history.replaceState(null, '', `?plan=${planId}`);
+    history.replaceState(null, '', `?plan=${planId}&currency=${currentCurrency}`);
   }
 
   function updateStepIndicator(activeStep: number) {
@@ -538,10 +674,24 @@ const baseFeatures = [
 
   // Inicializar
   document.addEventListener('DOMContentLoaded', () => {
+    // Obtener moneda inicial
+    const currency = getInitialCurrency();
+
     // Obtener plan de URL o usar default
     const planParam = getQueryParam('plan');
     const validPlan = plansData.find((p) => p.id === planParam);
     selectPlan(validPlan ? validPlan.id : '1-mes');
+
+    // Aplicar moneda (después de selectPlan para que updateMobileSummary funcione)
+    setCurrency(currency);
+
+    // Toggle de moneda
+    document.querySelectorAll('#currency-toggle .currency-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selected = (btn as HTMLElement).dataset.currency;
+        if (selected) setCurrency(selected);
+      });
+    });
 
     // Selector de planes inferior
     document.querySelectorAll('.plan-select-btn').forEach((btn) => {
@@ -579,13 +729,17 @@ const baseFeatures = [
 
       const plan = plansData.find((p) => p.id === currentPlan);
       const planName = plan ? plan.name : currentPlan;
-      const planPrice = plan ? plan.price : '';
+      const planPrice = plan
+        ? currentCurrency === 'usd'
+          ? plan.price.usd
+          : plan.price.cop
+        : '';
 
       const mensaje =
         `*Solicitud de Plan - Xuper Play*\n\n` +
         `*Nombre:* ${nombre}\n` +
         `*Celular:* ${celular}\n` +
-        `*Plan:* ${planName} - $${planPrice}\n` +
+        `*Plan:* ${planName} - ${planPrice}\n` +
         `*Tipo:* ${tipo}\n\n` +
         `_Adjunto mi comprobante de pago_`;
 
