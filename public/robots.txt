@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /downloads/
+Sitemap: https://xuperplay.com/sitemap-index.xml

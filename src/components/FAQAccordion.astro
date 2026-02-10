@@ -5,12 +5,12 @@ const faqs = [
   {
     question: '¿Qué es XuperPlay y cómo funciona?',
     answer:
-      'XuperPlay es una plataforma de streaming que te permite acceder a miles de canales en vivo, películas, series y contenido on-demand desde cualquier dispositivo. Solo necesitas descargar la app, crear tu cuenta y comenzar a disfrutar.',
+      'XuperPlay es una plataforma de streaming que te permite acceder a miles de canales en vivo, películas, series y contenido on-demand desde cualquier dispositivo Android. Solo necesitas descargar la app e iniciar sesión para comenzar a disfrutar.',
   },
   {
     question: '¿En qué dispositivos puedo usar XuperPlay?',
     answer:
-      'XuperPlay es compatible con Smart TVs (Samsung, LG, Sony), dispositivos Android (teléfonos, tablets, TV boxes), iOS (iPhone, iPad), Amazon Fire TV/Firestick, y puedes verlo también desde tu navegador web.',
+      'XuperPlay es compatible con dispositivos Android: Smart TVs con Android TV, TV Boxes, Amazon Fire TV/Firestick, Xiaomi Mi TV Stick, celulares y tablets Android, Google Chromecast 4 y PC con emulador Android.',
   },
   {
     question: '¿Necesito una conexión a internet rápida?',
@@ -18,32 +18,47 @@ const faqs = [
       'Recomendamos una conexión de al menos 5 Mbps para streaming en calidad estándar y 10 Mbps o más para HD/4K. Sin embargo, nuestra tecnología se adapta automáticamente a tu velocidad de internet para ofrecerte la mejor experiencia posible.',
   },
   {
-    question: '¿Puedo ver contenido sin conexión a internet?',
-    answer:
-      'Sí, con la función de descarga puedes guardar tus programas, películas y series favoritas en tu dispositivo para verlas sin conexión cuando quieras. Esta función está disponible en la versión Premium.',
-  },
-  {
     question: '¿Cuántos dispositivos puedo conectar simultáneamente?',
     answer:
-      'Dependiendo de tu plan de suscripción, puedes conectar de 1 a 5 dispositivos simultáneamente. El plan Básico permite 1 dispositivo, el plan Estándar 2 dispositivos, y el plan Premium hasta 5 dispositivos.',
+      'Depende de tu plan: el plan de 1 Mes y 3 Meses incluye 3 pantallas simultáneas, el plan de 6 Meses incluye 4 pantallas, y el plan de 12 Meses incluye hasta 5 pantallas.',
   },
   {
     question: '¿Ofrecen período de prueba gratuito?',
     answer:
-      'Sí, ofrecemos un período de prueba gratuito de 7 días para que puedas explorar todas las funcionalidades de XuperPlay sin compromiso. No se requiere tarjeta de crédito para la prueba.',
-  },
-  {
-    question: '¿Cómo puedo cancelar mi suscripción?',
-    answer:
-      'Puedes cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta. Ve a "Mi Cuenta" > "Suscripción" > "Cancelar". No hay penalizaciones ni cargos por cancelación.',
+      'Sí, ofrecemos un período de prueba gratuito de 3 días para que puedas explorar todas las funcionalidades de XuperPlay sin compromiso. Solo escríbenos por WhatsApp para solicitarla.',
   },
   {
     question: '¿Qué métodos de pago aceptan?',
     answer:
-      'Aceptamos tarjetas de crédito y débito (Visa, Mastercard, American Express), PayPal, transferencias bancarias y pagos en efectivo a través de puntos de pago autorizados en tu país.',
+      'Aceptamos pagos a través de Mercado Pago, donde puedes pagar con tarjeta de crédito, débito, PSE, efectivo en puntos autorizados y otros métodos disponibles en la plataforma.',
+  },
+  {
+    question: '¿Cómo realizo mi pago?',
+    answer:
+      'Es muy sencillo: 1) Haz clic en "Solicitar" en el plan que desees, 2) Realiza tu pago en Mercado Pago, 3) Completa el formulario con tus datos y envíanos el comprobante por WhatsApp. Tu servicio se activa en menos de 24 horas.',
+  },
+  {
+    question: '¿Cómo puedo cancelar mi suscripción?',
+    answer:
+      'Puedes cancelar tu suscripción en cualquier momento. Solo escríbenos por WhatsApp y procesaremos tu solicitud. No hay penalizaciones ni cargos por cancelación.',
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer,
+    },
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section id="faqs" class="py-20 bg-gray-50">
   <div class="container mx-auto px-4">

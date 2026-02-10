@@ -4,50 +4,57 @@ import Sparkles from './icons/Sparkles.astro';
 
 const plans = [
   {
+    id: '1-mes',
     name: '1 MES',
     price: '9',
     period: 'Paga cada mes',
+    screens: 3,
     featured: false,
     badge: null,
+    originalMonthly: null,
+    monthlyPrice: null,
   },
   {
+    id: '3-meses',
     name: '3 MESES',
     price: '27',
     period: 'Paga cada 3 meses',
+    screens: 3,
     featured: false,
     badge: null,
+    originalMonthly: null,
+    monthlyPrice: null,
   },
   {
+    id: '6-meses',
     name: '6 MESES',
     price: '49',
     period: '+ 1 MES GRATIS',
-    featured: true,
+    screens: 4,
+    featured: false,
     badge: 'Popular',
+    originalMonthly: '$9',
+    monthlyPrice: '$7',
   },
   {
+    id: '12-meses',
     name: '12 MESES',
     price: '87',
     period: '+ 2 MESES GRATIS',
-    featured: false,
+    screens: 5,
+    featured: true,
     badge: 'Mejor Valor',
+    originalMonthly: '$9',
+    monthlyPrice: '$6.2',
   },
 ];
 
-const features = [
+const baseFeatures = [
   '+ 1000 canales',
-  'Series + Películas',
+  'Series + Peliculas',
   'Calidad HD y FHD',
-  '3 pantallas',
   'Paquete Premium',
 ];
-
-// Función para generar el mensaje de WhatsApp
-const getWhatsAppUrl = (planName: string, price: string) => {
-  const message = encodeURIComponent(
-    `¡Hola! Me interesa el plan ${planName} de $${price}. ¿Podrían darme más información?`
-  );
-  return `https://wa.me/+573014034646?text=${message}`;
-};
 ---
 
 <section id="planes" class="py-20 bg-white">
@@ -58,81 +65,136 @@ const getWhatsAppUrl = (planName: string, price: string) => {
         Nuestros Planes
       </h2>
       <p class="text-xl text-gray-600">
-        Selecciona un plan y obtén acceso a todo el contenido de FLUJO TV.
+        Selecciona un plan y obten acceso a todo el contenido de XUPER PLAY.
       </p>
     </div>
 
     <!-- Pricing Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
-      {plans.map((plan) => (
-        <div
-          class={`relative bg-white rounded-2xl shadow-lg transition-all duration-300 overflow-hidden
-            ${plan.featured
-              ? 'border-2 border-primary lg:scale-105 shadow-2xl ring-4 ring-primary/10'
-              : 'border border-gray-200 hover:shadow-xl hover:-translate-y-1'
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto items-start"
+    >
+      {
+        plans.map((plan) => (
+          <div
+            class={`relative rounded-2xl shadow-lg transition-all duration-300 overflow-visible
+            ${
+              plan.featured
+                ? 'featured-card lg:scale-105 lg:-my-4 shadow-2xl z-10'
+                : 'bg-white border border-gray-200 hover:shadow-xl hover:-translate-y-1'
             }`}
-        >
-          {/* Badge Popular */}
-          {plan.badge && (
-            <div class="absolute top-0 right-0 bg-gradient-primary text-white px-4 py-1 rounded-bl-2xl text-sm font-bold flex items-center gap-1">
-              <Sparkles size={14} />
-              {plan.badge}
-            </div>
-          )}
+          >
+            {/* Gradient glow background for featured */}
+            {plan.featured && (
+              <div class="absolute -inset-[2px] rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600 opacity-100 z-0" />
+            )}
 
-          {/* Card Content */}
-          <div class="p-6 lg:p-8">
-            {/* Plan Name */}
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">
-              {plan.name}
-            </h3>
+            {/* Inner card for featured (sits on top of glow border) */}
+            <div class={`relative z-10 ${plan.featured ? 'bg-gray-900 rounded-2xl overflow-hidden' : ''}`}>
 
-            {/* Price */}
-            <div class="mb-4">
-              <div class="flex items-start gap-1">
-                <span class="text-2xl font-bold text-gray-900 mt-1">$</span>
-                <span class="text-5xl lg:text-6xl font-extrabold gradient-text">
-                  {plan.price}
-                </span>
-              </div>
-              <p class={`text-sm font-semibold mt-2 ${plan.featured ? 'text-primary' : 'text-gray-600'}`}>
-                {plan.period}
-              </p>
-            </div>
+              {/* Badge */}
+              {plan.badge && !plan.featured && (
+                <div class="absolute top-0 right-0 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-1 rounded-bl-2xl text-sm font-bold flex items-center gap-1 z-20">
+                  <Sparkles size={14} />
+                  {plan.badge}
+                </div>
+              )}
 
-            {/* Divider */}
-            <div class="border-t border-gray-200 my-6"></div>
-
-            {/* Features List */}
-            <ul class="space-y-3 mb-8">
-              {features.map((feature) => (
-                <li class="flex items-center gap-3">
-                  <div class={`shrink-0 rounded-full p-1 ${plan.featured ? 'bg-primary' : 'bg-gray-200'}`}>
-                    <Check size={14} class={plan.featured ? 'text-white' : 'text-gray-600'} />
+              {/* Featured top banner */}
+              {plan.featured && (
+                <div class="relative bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 px-6 py-3 text-center overflow-hidden">
+                  <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 40 40&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M20 20.5V18H0v-2h20v-2l2 3.5-2 3z&quot; fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.15&quot;/%3E%3C/svg%3E');" />
+                  <div class="relative flex items-center justify-center gap-2">
+                    <Sparkles size={16} class="text-yellow-300 animate-pulse" />
+                    <span class="text-white font-extrabold text-sm tracking-widest uppercase">{plan.badge}</span>
+                    <Sparkles size={16} class="text-yellow-300 animate-pulse" />
                   </div>
-                  <span class="text-gray-700 text-sm lg:text-base">
-                    {feature}
-                  </span>
-                </li>
-              ))}
-            </ul>
+                </div>
+              )}
 
-            {/* CTA Button */}
-            <a
-              href={getWhatsAppUrl(plan.name, plan.price)}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={`block w-full text-center py-3 px-6 rounded-lg font-bold text-base transition-all duration-300
-                ${plan.featured
-                  ? 'gradient-primary text-white shadow-lg hover:shadow-xl hover:scale-105'
-                  : 'bg-gray-100 text-gray-900 hover:bg-gray-200 hover:shadow-md'
-                }`}
-            >
-              Solicitar
-            </a>
+              {/* Card Content */}
+              <div class={`p-6 lg:p-8 ${plan.featured ? 'pt-6' : ''}`}>
+                {/* Plan Name */}
+                <h3 class={`text-2xl font-bold mb-2 ${plan.featured ? 'text-white' : 'text-gray-900'}`}>
+                  {plan.name}
+                </h3>
+
+                {/* Price */}
+                <div class="mb-4">
+                  <div class="flex items-start gap-1">
+                    <span class={`text-2xl font-bold mt-1 ${plan.featured ? 'text-blue-300' : 'text-gray-900'}`}>$</span>
+                    <span class={`text-5xl lg:text-6xl font-extrabold ${plan.featured ? 'featured-price-text' : 'gradient-text'}`}>
+                      {plan.price}
+                    </span>
+                  </div>
+                  <p
+                    class={`text-sm font-semibold mt-2 ${plan.featured ? 'text-blue-300' : 'text-gray-600'}`}
+                  >
+                    {plan.period}
+                  </p>
+                  {plan.originalMonthly && plan.monthlyPrice && (
+                    <p class={`text-xs mt-1 font-semibold ${plan.featured ? 'text-emerald-400' : 'text-green-600'}`}>
+                      <span class={`line-through ${plan.featured ? 'text-gray-500' : 'text-gray-400'}`}>{plan.originalMonthly}/mes</span>
+                      {' \u2192 '}
+                      <span>{plan.monthlyPrice}/mes</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* Divider */}
+                <div class={`border-t my-6 ${plan.featured ? 'border-gray-700' : 'border-gray-200'}`} />
+
+                {/* Features List */}
+                <ul class="space-y-3 mb-8">
+                  {baseFeatures.map((feature) => (
+                    <li class="flex items-center gap-3">
+                      <div
+                        class={`shrink-0 rounded-full p-1 ${plan.featured ? 'bg-blue-500' : 'bg-gray-200'}`}
+                      >
+                        <Check
+                          size={14}
+                          class={plan.featured ? 'text-white' : 'text-gray-600'}
+                        />
+                      </div>
+                      <span class={`text-sm lg:text-base ${plan.featured ? 'text-gray-300' : 'text-gray-700'}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                  {/* Pantallas - dinámico por plan */}
+                  <li class="flex items-center gap-3">
+                    <div
+                      class={`shrink-0 rounded-full p-1 ${plan.featured ? 'bg-blue-500' : 'bg-gray-200'}`}
+                    >
+                      <Check
+                        size={14}
+                        class={plan.featured ? 'text-white' : 'text-gray-600'}
+                      />
+                    </div>
+                    <span
+                      class={`text-sm lg:text-base font-semibold ${plan.featured ? 'text-blue-300' : plan.screens > 3 ? 'text-primary-500' : 'text-gray-700'}`}
+                    >
+                      {plan.screens} pantallas
+                    </span>
+                  </li>
+                </ul>
+
+                {/* CTA Button */}
+                <a
+                  href={`/pago?plan=${plan.id}`}
+                  class={`block w-full text-center py-3 px-6 rounded-lg font-bold text-base transition-all duration-300 cursor-pointer
+                  ${
+                    plan.featured
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/40 hover:scale-105'
+                      : 'bg-gray-100 text-gray-900 hover:bg-gray-200 hover:shadow-md'
+                  }`}
+                >
+                  Solicitar
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     {/* Footer Message */}
@@ -150,5 +212,23 @@ const getWhatsAppUrl = (planName: string, price: string) => {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .featured-price-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #c084fc 50%, #60a5fa 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .featured-card {
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.15));
   }
 </style>

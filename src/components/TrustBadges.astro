@@ -1,0 +1,45 @@
+---
+import Shield from './icons/Shield.astro';
+import Clock from './icons/Clock.astro';
+import CheckCircle from './icons/CheckCircle.astro';
+import Star from './icons/Star.astro';
+
+const badges = [
+  {
+    icon: Shield,
+    title: 'Pago 100% Seguro',
+    description: 'Transacción protegida por Mercado Pago',
+  },
+  {
+    icon: Clock,
+    title: 'Activación Inmediata',
+    description: 'Se activa al enviar tu comprobante',
+  },
+  {
+    icon: CheckCircle,
+    title: 'Soporte WhatsApp',
+    description: 'Asistencia directa por WhatsApp',
+  },
+  {
+    icon: Star,
+    title: 'Garantía de Servicio',
+    description: 'Contenido premium sin interrupciones',
+  },
+];
+---
+
+<div class="grid grid-cols-2 gap-3">
+  {
+    badges.map((badge) => (
+      <div class="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-lg p-3">
+        <div class="shrink-0 mt-0.5">
+          <badge.icon size={18} class="text-blue-600" />
+        </div>
+        <div>
+          <p class="text-xs font-bold text-gray-900">{badge.title}</p>
+          <p class="text-[11px] text-gray-600 leading-tight">{badge.description}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>

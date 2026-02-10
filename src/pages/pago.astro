@@ -1,0 +1,622 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+import Check from '../components/icons/Check.astro';
+import CreditCard from '../components/icons/CreditCard.astro';
+import Sparkles from '../components/icons/Sparkles.astro';
+
+const plans = [
+  {
+    id: '1-mes',
+    name: '1 MES',
+    price: 9,
+    screens: 3,
+    period: 'Paga cada mes',
+    months: 1,
+    bonusMonths: 0,
+    badge: null,
+    featured: false,
+    mercadoPagoLink: 'https://mpago.li/1NhmWsK',
+  },
+  {
+    id: '3-meses',
+    name: '3 MESES',
+    price: 27,
+    screens: 3,
+    period: 'Paga cada 3 meses',
+    months: 3,
+    bonusMonths: 0,
+    badge: null,
+    featured: false,
+    mercadoPagoLink: 'https://mpago.li/1H7DUuw',
+  },
+  {
+    id: '6-meses',
+    name: '6 MESES',
+    price: 49,
+    screens: 4,
+    period: '+ 1 MES GRATIS',
+    months: 6,
+    bonusMonths: 1,
+    badge: 'Popular',
+    featured: false,
+    mercadoPagoLink: 'https://mpago.li/1hr3LTj',
+  },
+  {
+    id: '12-meses',
+    name: '12 MESES',
+    price: 87,
+    screens: 5,
+    period: '+ 2 MESES GRATIS',
+    months: 12,
+    bonusMonths: 2,
+    badge: 'Mejor Valor',
+    featured: true,
+    mercadoPagoLink: 'https://mpago.li/2UKG4bP',
+  },
+];
+
+const baseFeatures = [
+  '+ 1000 canales',
+  'Series + Peliculas',
+  'Calidad HD y FHD',
+  'Paquete Premium',
+];
+---
+
+<MainLayout
+  title="Completar Compra - XuperPlay"
+  description="Completa tu compra de XuperPlay. Pago seguro con Mercado Pago."
+  robots="noindex, nofollow"
+>
+  <Header />
+
+  <main class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-12 bg-gradient-to-r from-primary-600 to-secondary-600">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-3xl md:text-5xl font-bold text-white mb-3">
+          Completar tu Compra
+        </h1>
+        <p class="text-lg text-white/90 max-w-2xl mx-auto">
+          Estás a pocos pasos de disfrutar el mejor contenido de streaming
+        </p>
+      </div>
+    </section>
+
+    <!-- Checkout Content -->
+    <section class="py-12">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto lg:grid lg:grid-cols-12 lg:gap-8">
+
+          <!-- Columna Izquierda: Pasos -->
+          <div class="lg:col-span-7 space-y-6 mb-8 lg:mb-0">
+
+            <!-- Indicador de Pasos -->
+            <div class="flex items-center justify-between mb-8 px-2">
+              {['Plan', 'Datos', 'Pagar', 'Confirmar'].map((step, i) => (
+                <div class="flex items-center flex-1">
+                  <div class="flex flex-col items-center">
+                    <div
+                      class={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 step-circle ${i === 0 ? 'gradient-primary text-white shadow-md' : 'bg-gray-200 text-gray-500'}`}
+                      data-step={i + 1}
+                    >
+                      {i + 1}
+                    </div>
+                    <span class="text-xs mt-1 font-semibold text-gray-500 hidden sm:block">{step}</span>
+                  </div>
+                  {i < 3 && (
+                    <div class="flex-1 h-0.5 bg-gray-200 mx-2 step-line" data-step={i + 1} />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <!-- Paso 1: Tu Plan -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6" id="step-plan">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
+                  1
+                </div>
+                <h2 class="text-xl font-bold text-gray-900">Tu Plan</h2>
+              </div>
+
+              {plans.map((plan) => (
+                <div class="plan-detail hidden" data-plan-id={plan.id}>
+                  <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-5 border border-blue-100">
+                    <div class="flex items-start justify-between">
+                      <div>
+                        <div class="flex items-center gap-2 mb-1">
+                          <h3 class="text-2xl font-extrabold text-gray-900">{plan.name}</h3>
+                          {plan.badge && (
+                            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-2.5 py-0.5 rounded-full text-xs font-bold">
+                              <Sparkles size={12} />
+                              {plan.badge}
+                            </span>
+                          )}
+                        </div>
+                        <p class="text-sm text-gray-600 font-semibold">{plan.period}</p>
+                      </div>
+                      <div class="text-right">
+                        <div class="flex items-start">
+                          <span class="text-lg font-bold text-gray-700 mt-1">$</span>
+                          <span class="text-4xl font-extrabold gradient-text">{plan.price}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-4 flex flex-wrap gap-3">
+                      <span class="inline-flex items-center gap-1.5 text-sm text-gray-700 bg-white px-3 py-1 rounded-full border border-gray-200">
+                        <Check size={14} class="text-green-600" />
+                        {plan.screens} pantallas
+                      </span>
+                      {baseFeatures.slice(0, 2).map((feature) => (
+                        <span class="inline-flex items-center gap-1.5 text-sm text-gray-700 bg-white px-3 py-1 rounded-full border border-gray-200">
+                          <Check size={14} class="text-green-600" />
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button
+                    class="mt-3 text-sm text-blue-600 hover:text-blue-800 font-semibold transition-colors cursor-pointer"
+                    onclick="document.getElementById('plan-selector').scrollIntoView({ behavior: 'smooth' })"
+                  >
+                    Cambiar plan &darr;
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <!-- Paso 2: Tus Datos -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6" id="step-datos">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
+                  2
+                </div>
+                <h2 class="text-xl font-bold text-gray-900">Tus Datos</h2>
+              </div>
+
+              <form id="checkoutForm" class="space-y-4">
+                <div>
+                  <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Nombre Completo
+                  </label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                    placeholder="Ingresa tu nombre"
+                  />
+                </div>
+
+                <div>
+                  <label for="celular" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Número de Celular
+                  </label>
+                  <input
+                    type="tel"
+                    id="celular"
+                    name="celular"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                    placeholder="+57 300 123 4567"
+                  />
+                </div>
+
+                <div>
+                  <label for="tipo" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Tipo de solicitud
+                  </label>
+                  <select
+                    id="tipo"
+                    name="tipo"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none appearance-none bg-white cursor-pointer"
+                  >
+                    <option value="">Selecciona una opción</option>
+                    <option value="Comprar">Comprar nuevo</option>
+                    <option value="Renovar">Renovar plan existente</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+
+            <!-- Paso 3: Pagar -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6" id="step-pagar">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
+                  3
+                </div>
+                <h2 class="text-xl font-bold text-gray-900">Pagar</h2>
+              </div>
+
+              <p class="text-sm text-gray-600 mb-4">
+                Haz clic en el botón para ir a la página de pago seguro de Mercado Pago. Se abrirá en una nueva pestaña.
+              </p>
+
+              {plans.map((plan) => (
+                <a
+                  href={plan.mercadoPagoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mp-pay-button hidden items-center justify-center gap-3 w-full py-4 bg-[#00b1ea] hover:bg-[#0095c8] text-white font-bold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+                  data-plan-id={plan.id}
+                  data-plan-price={plan.price}
+                >
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.94s4.18 1.36 4.18 3.87c0 1.73-1.31 2.93-3.12 3.17z" />
+                  </svg>
+                  Pagar ${plan.price} con Mercado Pago
+                </a>
+              ))}
+
+              <div class="flex items-center gap-2 mt-3 text-xs text-gray-500">
+                <svg class="w-4 h-4 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span>Transacción protegida por Mercado Pago. Acepta tarjetas, PSE, Nequi y efectivo.</span>
+              </div>
+            </div>
+
+            <!-- Paso 4: Confirmar -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 opacity-50 transition-opacity duration-300" id="step-confirmar">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-full gradient-primary text-white flex items-center justify-center font-bold text-sm shadow-md">
+                  4
+                </div>
+                <h2 class="text-xl font-bold text-gray-900">Confirmar</h2>
+              </div>
+
+              <div id="pre-pago-msg">
+                <p class="text-sm text-gray-500">
+                  Este paso se habilitará después de realizar tu pago en Mercado Pago.
+                </p>
+              </div>
+
+              <div id="post-pago-msg" class="hidden">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                  <p class="text-sm font-semibold text-green-800">
+                    ¿Ya realizaste tu pago? Envía tu comprobante por WhatsApp para activar tu servicio.
+                  </p>
+                </div>
+
+                <button
+                  id="whatsappBtn"
+                  type="button"
+                  class="flex items-center justify-center gap-2 w-full py-4 gradient-primary text-white font-bold rounded-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer text-base"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  Enviar comprobante por WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Resumen (sticky) -->
+          <div class="lg:col-span-5">
+            <div class="lg:sticky lg:top-24 space-y-6">
+
+              <!-- Resumen de Compra -->
+              <div class="relative rounded-2xl overflow-hidden">
+                <div class="absolute -inset-[2px] rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-blue-600 z-0"></div>
+                <div class="relative z-10 bg-white rounded-2xl p-6">
+                  <h3 class="text-lg font-bold text-gray-900 mb-4">Resumen de Compra</h3>
+
+                  {plans.map((plan) => (
+                    <div class="summary-detail hidden" data-plan-id={plan.id}>
+                      <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                          <span class="text-gray-600">Plan</span>
+                          <span class="font-bold text-gray-900">{plan.name}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                          <span class="text-gray-600">Pantallas</span>
+                          <span class="font-semibold text-gray-900">{plan.screens} dispositivos</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                          <span class="text-gray-600">Duración</span>
+                          <span class="font-semibold text-gray-900">{plan.months} {plan.months === 1 ? 'mes' : 'meses'}</span>
+                        </div>
+                        {plan.bonusMonths > 0 && (
+                          <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Bonus</span>
+                            <span class="font-semibold text-green-600">+{plan.bonusMonths} {plan.bonusMonths === 1 ? 'mes' : 'meses'} gratis</span>
+                          </div>
+                        )}
+
+                        <div class="border-t border-gray-200 pt-3 mt-3">
+                          <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-900">Total</span>
+                            <span class="text-3xl font-extrabold gradient-text">${plan.price}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Trust Badges -->
+              <TrustBadges />
+
+              <!-- Métodos de pago -->
+              <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-5">
+                <h4 class="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <CreditCard size={16} class="text-gray-600" />
+                  Métodos de pago aceptados
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                  {['Visa', 'Mastercard', 'PSE', 'Nequi', 'Efecty', 'Daviplata'].map((method) => (
+                    <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full font-medium">
+                      {method}
+                    </span>
+                  ))}
+                </div>
+                <p class="text-[11px] text-gray-500 mt-2">Todos los métodos disponibles a través de Mercado Pago</p>
+              </div>
+
+              <!-- Ayuda -->
+              <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-5">
+                <h4 class="text-sm font-bold text-gray-900 mb-2">¿Necesitas ayuda?</h4>
+                <p class="text-xs text-gray-600 mb-3">Nuestro equipo de soporte está disponible para asistirte.</p>
+                <a
+                  href="https://wa.me/573014034646?text=Hola%2C%20necesito%20ayuda%20con%20mi%20compra%20en%20XuperPlay"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-all duration-200 text-sm"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  Contactar soporte
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selector de Planes Alternativo -->
+        <div class="max-w-6xl mx-auto mt-16" id="plan-selector">
+          <h3 class="text-2xl font-bold text-gray-900 text-center mb-8">
+            Cambiar Plan
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {plans.map((plan) => (
+              <button
+                class="plan-select-btn bg-white rounded-xl border-2 border-gray-200 p-5 text-left hover:border-blue-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                data-plan-id={plan.id}
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <h4 class="font-bold text-gray-900">{plan.name}</h4>
+                  {plan.badge && (
+                    <span class="text-[10px] font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-white px-2 py-0.5 rounded-full">
+                      {plan.badge}
+                    </span>
+                  )}
+                </div>
+                <div class="flex items-baseline gap-1">
+                  <span class="text-sm font-bold text-gray-600">$</span>
+                  <span class="text-3xl font-extrabold gradient-text">{plan.price}</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">{plan.screens} pantallas &middot; {plan.period}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</MainLayout>
+
+<script>
+  // Datos de planes (duplicados en JS para manipulación del lado del cliente)
+  const plansData = [
+    { id: '1-mes', name: '1 MES', price: 9, screens: 3 },
+    { id: '3-meses', name: '3 MESES', price: 27, screens: 3 },
+    { id: '6-meses', name: '6 MESES', price: 49, screens: 4 },
+    { id: '12-meses', name: '12 MESES', price: 87, screens: 5 },
+  ];
+
+  let currentPlan = '1-mes';
+  let paymentClicked = false;
+
+  function getQueryParam(param: string): string | null {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  function selectPlan(planId: string) {
+    // Validar que el plan existe
+    const plan = plansData.find((p) => p.id === planId);
+    if (!plan) return;
+
+    currentPlan = planId;
+
+    // Mostrar/ocultar detalles del plan
+    document.querySelectorAll('.plan-detail').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (htmlEl.dataset.planId === planId) {
+        htmlEl.classList.remove('hidden');
+      } else {
+        htmlEl.classList.add('hidden');
+      }
+    });
+
+    // Mostrar/ocultar resumen
+    document.querySelectorAll('.summary-detail').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (htmlEl.dataset.planId === planId) {
+        htmlEl.classList.remove('hidden');
+      } else {
+        htmlEl.classList.add('hidden');
+      }
+    });
+
+    // Mostrar/ocultar botón de MercadoPago
+    document.querySelectorAll('.mp-pay-button').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (htmlEl.dataset.planId === planId) {
+        htmlEl.classList.remove('hidden');
+        htmlEl.classList.add('flex');
+      } else {
+        htmlEl.classList.add('hidden');
+        htmlEl.classList.remove('flex');
+      }
+    });
+
+    // Actualizar selector de planes inferior
+    document.querySelectorAll('.plan-select-btn').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (htmlEl.dataset.planId === planId) {
+        htmlEl.classList.add('border-blue-500', 'shadow-lg', 'bg-blue-50');
+        htmlEl.classList.remove('border-gray-200');
+      } else {
+        htmlEl.classList.remove('border-blue-500', 'shadow-lg', 'bg-blue-50');
+        htmlEl.classList.add('border-gray-200');
+      }
+    });
+
+    // Actualizar URL sin recargar
+    history.replaceState(null, '', `?plan=${planId}`);
+  }
+
+  function updateStepIndicator(activeStep: number) {
+    document.querySelectorAll('.step-circle').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      const step = parseInt(htmlEl.dataset.step || '0');
+      if (step <= activeStep) {
+        htmlEl.classList.add('gradient-primary', 'text-white', 'shadow-md');
+        htmlEl.classList.remove('bg-gray-200', 'text-gray-500');
+      } else {
+        htmlEl.classList.remove('gradient-primary', 'text-white', 'shadow-md');
+        htmlEl.classList.add('bg-gray-200', 'text-gray-500');
+      }
+    });
+
+    document.querySelectorAll('.step-line').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      const step = parseInt(htmlEl.dataset.step || '0');
+      if (step < activeStep) {
+        htmlEl.classList.add('bg-blue-500');
+        htmlEl.classList.remove('bg-gray-200');
+      } else {
+        htmlEl.classList.remove('bg-blue-500');
+        htmlEl.classList.add('bg-gray-200');
+      }
+    });
+  }
+
+  function activatePostPayment() {
+    paymentClicked = true;
+    const stepConfirmar = document.getElementById('step-confirmar');
+    const preMsg = document.getElementById('pre-pago-msg');
+    const postMsg = document.getElementById('post-pago-msg');
+
+    if (stepConfirmar) {
+      stepConfirmar.classList.remove('opacity-50');
+    }
+    if (preMsg) preMsg.classList.add('hidden');
+    if (postMsg) postMsg.classList.remove('hidden');
+
+    updateStepIndicator(4);
+
+    // Scroll suave al paso 4
+    setTimeout(() => {
+      stepConfirmar?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  }
+
+  // Inicializar
+  document.addEventListener('DOMContentLoaded', () => {
+    // Obtener plan de URL o usar default
+    const planParam = getQueryParam('plan');
+    const validPlan = plansData.find((p) => p.id === planParam);
+    selectPlan(validPlan ? validPlan.id : '1-mes');
+
+    // Selector de planes inferior
+    document.querySelectorAll('.plan-select-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const planId = (btn as HTMLElement).dataset.planId;
+        if (planId) {
+          selectPlan(planId);
+          // Scroll arriba al resumen del plan
+          document.getElementById('step-plan')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Botones de MercadoPago
+    document.querySelectorAll('.mp-pay-button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activatePostPayment();
+      });
+    });
+
+    // Botón WhatsApp
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    whatsappBtn?.addEventListener('click', () => {
+      const form = document.getElementById('checkoutForm') as HTMLFormElement;
+      const nombre = (document.getElementById('nombre') as HTMLInputElement)?.value;
+      const celular = (document.getElementById('celular') as HTMLInputElement)?.value;
+      const tipo = (document.getElementById('tipo') as HTMLSelectElement)?.value;
+
+      // Validar formulario
+      if (!nombre || !celular || !tipo) {
+        form?.reportValidity();
+        document.getElementById('step-datos')?.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      const plan = plansData.find((p) => p.id === currentPlan);
+      const planName = plan ? plan.name : currentPlan;
+      const planPrice = plan ? plan.price : '';
+
+      const mensaje =
+        `*Solicitud de Plan - Xuper Play*\n\n` +
+        `*Nombre:* ${nombre}\n` +
+        `*Celular:* ${celular}\n` +
+        `*Plan:* ${planName} - $${planPrice}\n` +
+        `*Tipo:* ${tipo}\n\n` +
+        `_Adjunto mi comprobante de pago_`;
+
+      const mensajeCodificado = encodeURIComponent(mensaje);
+      window.open(`https://wa.me/573014034646?text=${mensajeCodificado}`, '_blank');
+    });
+
+    // Tracking de paso activo al llenar formulario
+    const formInputs = document.querySelectorAll('#checkoutForm input, #checkoutForm select');
+    formInputs.forEach((input) => {
+      input.addEventListener('focus', () => {
+        updateStepIndicator(2);
+      });
+    });
+  });
+</script>
+
+<style>
+  .gradient-text {
+    background: linear-gradient(135deg, #3b82f6 0%, #513ca4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Custom select arrow */
+  select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+</style>
