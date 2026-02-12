@@ -1,0 +1,173 @@
+---
+import X from './icons/X.astro';
+---
+
+<!-- Fire TV Modal Backdrop -->
+<div
+  id="fireTVModal"
+  class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <!-- Modal Container -->
+  <div
+    class="bg-white rounded-2xl shadow-2xl max-w-lg w-full transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto"
+    id="fireTVModalContent"
+  >
+    <!-- Modal Header -->
+    <div class="relative bg-gradient-to-r from-blue-500 to-purple-600 rounded-t-2xl p-6">
+      <!-- Close Button -->
+      <button
+        id="closeFireTVModal"
+        class="absolute top-4 right-4 text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-all duration-200"
+        aria-label="Cerrar modal"
+      >
+        <X size={24} />
+      </button>
+
+      <!-- Title -->
+      <div class="flex flex-col items-center text-center pr-8">
+        <div class="inline-flex items-center justify-center w-14 h-14 bg-white/20 rounded-full mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <rect width="20" height="15" x="2" y="3" rx="2" />
+            <polyline points="17 21 12 16 7 21" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-1">
+          Instalación Fire TV Stick
+        </h2>
+        <p class="text-blue-100 text-sm">
+          Sigue estos pasos para instalar la app
+        </p>
+      </div>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="p-6 space-y-6">
+
+      <!-- Paso 1 -->
+      <div class="flex gap-4">
+        <div class="flex-shrink-0">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-md">
+            1
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Abre la app Downloader</h3>
+          <!-- Downloader Logo -->
+          <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-4 mb-3 border border-gray-200">
+            <div class="w-14 h-14 rounded-xl bg-orange-500 flex items-center justify-center shadow-md flex-shrink-0">
+              <span class="text-white font-black text-2xl">D</span>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-900">Downloader</p>
+              <p class="text-xs text-gray-500">by AFTVnews</p>
+            </div>
+          </div>
+          <p class="text-gray-700 text-sm">
+            Abre la aplicación <strong>Downloader</strong> en tu Fire TV Stick.
+          </p>
+          <p class="text-gray-500 text-xs mt-1">
+            Si no la tienes, descárgala gratis desde la Amazon App Store.
+          </p>
+        </div>
+      </div>
+
+      <!-- Separador -->
+      <div class="flex items-center gap-3 pl-4">
+        <div class="w-0.5 h-6 bg-gradient-to-b from-blue-300 to-purple-300 ml-[14px]"></div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="flex gap-4">
+        <div class="flex-shrink-0">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-md">
+            2
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Ingresa el código y presiona Go</h3>
+          <!-- Interfaz simulada de Downloader -->
+          <div class="bg-gray-900 rounded-xl p-4 mb-3 shadow-inner">
+            <div class="flex items-center gap-2 bg-gray-800 rounded-lg p-2 border border-gray-700">
+              <span class="text-gray-400 text-xs flex-shrink-0">URL:</span>
+              <div class="flex-1 bg-gray-700 rounded px-3 py-2">
+                <span class="text-orange-400 font-mono text-sm font-semibold">5926866</span>
+              </div>
+              <div class="bg-orange-500 text-white text-xs font-bold px-3 py-2 rounded flex-shrink-0">
+                Go
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-700 text-sm">
+            Escribe el código <code class="bg-gray-800 text-orange-400 px-2 py-0.5 rounded font-mono text-sm font-semibold">5926866</code> en la barra de búsqueda.
+          </p>
+          <p class="text-gray-500 text-xs mt-2">
+            O escribe: <code class="bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded font-mono text-xs">http://aftv.news/5926866</code>
+          </p>
+          <p class="text-gray-700 text-sm mt-2">
+            Luego presiona <strong>Go</strong> y la descarga comenzará automáticamente.
+          </p>
+        </div>
+      </div>
+
+      <!-- Info adicional -->
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-2">
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+          <p class="text-sm text-blue-800">
+            Una vez descargado, acepta la instalación y abre la app para disfrutar del contenido.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const fireTVModal = document.getElementById('fireTVModal');
+  const fireTVModalContent = document.getElementById('fireTVModalContent');
+  const openFireTVBtn = document.getElementById('openFireTVModal');
+  const closeFireTVBtn = document.getElementById('closeFireTVModal');
+
+  function openFireTVModal() {
+    if (fireTVModal) {
+      fireTVModal.classList.remove('pointer-events-none', 'opacity-0');
+      fireTVModal.classList.add('opacity-100');
+      setTimeout(() => {
+        fireTVModalContent?.classList.remove('scale-95');
+        fireTVModalContent?.classList.add('scale-100');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeFireTVModal() {
+    if (fireTVModal) {
+      fireTVModalContent?.classList.remove('scale-100');
+      fireTVModalContent?.classList.add('scale-95');
+      fireTVModal.classList.remove('opacity-100');
+      fireTVModal.classList.add('opacity-0');
+      setTimeout(() => {
+        fireTVModal.classList.add('pointer-events-none');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+  }
+
+  openFireTVBtn?.addEventListener('click', openFireTVModal);
+  closeFireTVBtn?.addEventListener('click', closeFireTVModal);
+
+  fireTVModal?.addEventListener('click', (e) => {
+    if (e.target === fireTVModal) {
+      closeFireTVModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && fireTVModal?.classList.contains('opacity-100')) {
+      closeFireTVModal();
+    }
+  });
+</script>

@@ -2,6 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import FireTVModal from '../components/FireTVModal.astro';
 import { Image } from 'astro:assets';
 import Download from '../components/icons/Download.astro';
 import Tv from '../components/icons/Tv.astro';
@@ -94,7 +95,8 @@ const installationGuides = [
     subtitle: 'FIRE TV STICK',
     icon: Tv,
     image: fireTvImg,
-    downloadLink: '/downloads/xplay.apk',
+    downloadLink: '#',
+    isFireTV: true,
   },
   {
     title: 'Celular',
@@ -237,15 +239,26 @@ const installationGuides = [
                     {guide.subtitle}
                   </p>
 
-                  {/* Download Button */}
-                  <a
-                    href={guide.downloadLink}
-                    download
-                    class="flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 mt-auto"
-                  >
-                    <Download size={20} />
-                    <span>Descargar</span>
-                  </a>
+                  {/* Download Button / Fire TV Modal Button */}
+                  {guide.isFireTV ? (
+                    <button
+                      id="openFireTVModal"
+                      type="button"
+                      class="flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 mt-auto cursor-pointer"
+                    >
+                      <Download size={20} />
+                      <span>Descargar</span>
+                    </button>
+                  ) : (
+                    <a
+                      href={guide.downloadLink}
+                      download
+                      class="flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 mt-auto"
+                    >
+                      <Download size={20} />
+                      <span>Descargar</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ))
@@ -294,5 +307,6 @@ const installationGuides = [
     </section>
   </main>
 
+  <FireTVModal />
   <Footer />
 </MainLayout>
