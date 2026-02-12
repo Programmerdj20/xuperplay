@@ -1,61 +1,94 @@
-# 🚀 XuperPlay - Plataforma de Streaming
+<div align="center">
 
-Plataforma de streaming moderna construida con **Astro** y **Tailwind CSS**, inspirada en xupertv.com. Diseño responsive, componentes modulares y experiencia de usuario optimizada.
+# XuperPlay
 
-## ✨ Características
+**Plataforma de streaming con contenido ilimitado**
 
-- 🎨 **Diseño Moderno**: Interfaz limpia con gradientes azul-púrpura
-- 📱 **Totalmente Responsive**: Optimizado para todos los dispositivos
-- ⚡ **Alto Rendimiento**: Generación estática con Astro para carga ultrarrápida
-- 🎭 **Componentes Interactivos**:
-  - Hero Carousel con navegación por teclado
-  - FAQ Accordion expandible
-  - Grid de características responsive
-  - Sección de instalación con múltiples métodos
-- 🎯 **TypeScript**: Type safety en todo el proyecto
-- 🎨 **Tailwind CSS 4**: Framework de utilidades con tema personalizado
-- 🔧 **Herramientas de Desarrollo**: ESLint, Prettier configurados
+Sitio web oficial de XuperPlay: landing page, planes de suscripcion, guia de instalacion y checkout integrado con MercadoPago.
 
-## 🏗️ Stack Tecnológico
+[![Astro](https://img.shields.io/badge/Astro-v5-BC52EE?logo=astro&logoColor=white)](https://astro.build/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://vercel.com/)
 
-- **Framework**: [Astro](https://astro.build/) v5
-- **Estilos**: [Tailwind CSS](https://tailwindcss.com/) v4
-- **Lenguaje**: TypeScript (strictest)
-- **Iconos**: [Lucide Icons](https://lucide.dev/)
-- **Animaciones**: Motion (para futuras mejoras)
+[Ver sitio en vivo](https://xuperplay.com)
 
-## 📁 Estructura del Proyecto
+</div>
+
+---
+
+## Acerca del Proyecto
+
+XuperPlay es una plataforma de entretenimiento que ofrece TV en vivo, peliculas, series, anime y contenido infantil en una sola app. Este repositorio contiene el sitio web oficial construido como sitio estatico con **Astro v5** y **Tailwind CSS v4**.
+
+### Caracteristicas principales
+
+- **Landing page** con hero carousel animado y secciones informativas
+- **Planes y precios** con switch de moneda COP/USD y auto-deteccion por geolocalizacion
+- **Checkout integrado** con MercadoPago para procesamiento de pagos
+- **Guia de instalacion** con dispositivos compatibles y enlaces de descarga
+- **FAQ interactivo** con acordeon animado
+- **Diseno responsive** optimizado para movil, tablet y desktop
+- **SEO optimizado** con meta tags Open Graph, Twitter Cards y sitemap automatico
+- **Alto rendimiento** con iconos SVG inline, imagenes optimizadas y cero frameworks JS en el cliente
+
+---
+
+## Tecnologias
+
+| Tecnologia | Version | Uso |
+|---|---|---|
+| [Astro](https://astro.build/) | v5 | Framework SSG |
+| [Tailwind CSS](https://tailwindcss.com/) | v4 | Estilos utility-first |
+| [TypeScript](https://www.typescriptlang.org/) | strict | Tipado estatico |
+| [MercadoPago](https://www.mercadopago.com/) | SDK | Procesamiento de pagos |
+| [Vercel](https://vercel.com/) | - | Hosting y deploy automatico |
+
+---
+
+## Estructura del Proyecto
 
 ```
 xuperplay/
+├── public/                        # Archivos estaticos (favicon, APK, robots.txt)
+│   └── downloads/                 # Archivos descargables
 ├── src/
-│   ├── components/          # Componentes reutilizables
-│   │   ├── Header.astro
-│   │   ├── HeroCarousel.astro
-│   │   ├── FeaturesGrid.astro
-│   │   ├── InstallationSection.astro
-│   │   ├── FAQAccordion.astro
-│   │   └── Footer.astro
-│   ├── layouts/             # Layouts de página
-│   │   └── MainLayout.astro
-│   ├── pages/               # Rutas de la aplicación
-│   │   └── index.astro
-│   └── styles/              # Estilos globales
-│       └── global.css
-├── public/                  # Archivos estáticos
-├── astro.config.mjs         # Configuración de Astro
-├── tailwind.config.mjs      # Configuración de Tailwind
-└── tsconfig.json            # Configuración de TypeScript
+│   ├── assets/images/             # Imagenes optimizadas por Astro
+│   │   ├── hero/                  # Imagenes del carousel principal
+│   │   ├── logos/                 # Logo de XuperPlay
+│   │   └── Dispositivos/         # Imagenes de dispositivos compatibles
+│   ├── components/                # Componentes Astro
+│   │   ├── Header.astro           # Navegacion con menu movil animado
+│   │   ├── HeroCarousel.astro     # Carousel hero con slides
+│   │   ├── FeaturesGrid.astro     # Grid de caracteristicas
+│   │   ├── PricingSection.astro   # Planes con switch COP/USD
+│   │   ├── FAQAccordion.astro     # Preguntas frecuentes
+│   │   ├── TrustBadges.astro      # Insignias de confianza
+│   │   ├── TrialModal.astro       # Modal de prueba gratuita
+│   │   ├── Footer.astro           # Pie de pagina
+│   │   └── icons/                 # 26 iconos SVG como componentes
+│   ├── layouts/
+│   │   └── MainLayout.astro       # Layout principal con head y meta tags
+│   ├── pages/
+│   │   ├── index.astro            # Pagina de inicio
+│   │   ├── instalacion.astro      # Guia de instalacion
+│   │   └── pago.astro             # Checkout con MercadoPago
+│   └── styles/
+│       └── global.css             # Tema Tailwind CSS v4 con variables custom
+├── astro.config.mjs               # Configuracion de Astro
+├── tsconfig.json                  # TypeScript strict
+└── package.json
 ```
 
-## 🚀 Inicio Rápido
+---
 
-### Prerrequisitos
+## Inicio Rapido
 
-- Node.js 18+
-- npm, pnpm o yarn
+### Requisitos previos
 
-### Instalación
+- [Node.js](https://nodejs.org/) v18 o superior
+- npm
+
+### Instalacion
 
 ```bash
 # Clonar el repositorio
@@ -64,107 +97,115 @@ cd xuperplay
 
 # Instalar dependencias
 npm install
+```
 
-# Iniciar servidor de desarrollo
+### Variables de entorno
+
+Crea un archivo `.env` en la raiz del proyecto:
+
+```env
+PUBLIC_MP_PUBLIC_KEY=tu_public_key_de_mercadopago
+```
+
+### Desarrollo
+
+```bash
+# Iniciar servidor de desarrollo en http://localhost:4321
 npm run dev
 ```
 
-El proyecto estará disponible en `http://localhost:4321`
-
-## 📜 Scripts Disponibles
-
-| Comando                   | Acción                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Instala las dependencias                         |
-| `npm run dev`             | Inicia el servidor de desarrollo                 |
-| `npm run build`           | Construye el sitio para producción              |
-| `npm run preview`         | Previsualiza la build de producción             |
-| `npm run astro ...`       | Ejecuta comandos CLI de Astro                    |
-
-## 🎨 Componentes Principales
-
-### Header
-Navegación responsive con menú móvil hamburguesa, smooth scroll y sticky positioning.
-
-### Hero Carousel
-Slider interactivo con:
-- 3 slides con transiciones suaves
-- Navegación por flechas e indicadores
-- Soporte para navegación por teclado
-- Auto-play opcional
-
-### Features Grid
-Grid responsive de 9 características con iconos de Lucide, hover effects y diseño de tarjetas.
-
-### Installation Section
-Guía de instalación paso a paso para:
-- Smart TV
-- Android/iOS
-- Android APK
-- Firestick/Fire TV
-
-### FAQ Accordion
-Sistema de preguntas frecuentes con 8 items expandibles/colapsables.
-
-### Footer
-Footer completo con:
-- Información de contacto
-- Links organizados por categorías
-- Redes sociales
-- Copyright
-
-## 🎨 Personalización
-
-### Colores
-
-Los colores principales se definen en `src/styles/global.css`:
-
-```css
---color-primary-500: #3b82f6;
---color-secondary-500: #513ca4;
-```
-
-### Tipografía
-
-Fuente: **Montserrat** (Google Fonts)
-
-## 📦 Deployment
-
-### Vercel (Recomendado)
+### Build de produccion
 
 ```bash
+# Generar sitio estatico en dist/
 npm run build
-vercel --prod
+
+# Previsualizar build
+npm run preview
 ```
-
-### Netlify
-
-```bash
-npm run build
-# Subir el directorio ./dist/
-```
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Para cambios importantes:
-
-1. Fork el proyecto
-2. Crea una rama (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📝 Licencia
-
-Este proyecto es de código abierto y está disponible bajo la licencia MIT.
-
-## 🙏 Agradecimientos
-
-- Inspirado en [xupertv.com](https://www.xupertv.com/)
-- Construido con [Astro](https://astro.build/)
-- Estilos con [Tailwind CSS](https://tailwindcss.com/)
-- Iconos de [Lucide](https://lucide.dev/)
 
 ---
 
-**Desarrollado con ❤️ usando Claude Code**
+## Scripts Disponibles
+
+| Comando | Accion |
+|---|---|
+| `npm run dev` | Servidor de desarrollo (puerto 4321) |
+| `npm run build` | Build de produccion en `dist/` |
+| `npm run preview` | Previsualizar build de produccion |
+| `npx eslint .` | Verificar errores de lint |
+| `npx prettier --check .` | Verificar formato de codigo |
+| `npx prettier --write .` | Formatear codigo automaticamente |
+
+---
+
+## Paginas
+
+| Ruta | Descripcion |
+|---|---|
+| `/` | Landing page con hero, caracteristicas, planes, FAQ y contacto |
+| `/instalacion` | Guia de instalacion con dispositivos compatibles y descargas |
+| `/pago` | Checkout con integracion MercadoPago por plan seleccionado |
+
+---
+
+## Deploy
+
+El proyecto usa **Vercel** con deploy automatico. Cada push a `main` genera un nuevo deploy en produccion.
+
+| Entorno | URL |
+|---|---|
+| Produccion | [xuperplay.com](https://xuperplay.com) |
+
+---
+
+## Convenciones de Codigo
+
+- **Iconos**: SVG inline como componentes `.astro` en `src/components/icons/`
+- **Imagenes**: Importar desde `src/assets/images/` y usar `<Image>` de `astro:assets`
+- **Estilos**: Clases utility de Tailwind CSS v4 inline, tema con `@theme` en `global.css`
+- **Interactividad**: Vanilla JS en tags `<script>` dentro de componentes Astro
+- **Formato**: Prettier con single quotes, semicolons, 2 espacios
+
+---
+
+## Paleta de Colores
+
+| Color | Hex | Uso |
+|---|---|---|
+| Primary 500 | `#3b82f6` | Botones, enlaces, acentos |
+| Primary 600 | `#2563eb` | Hover, elementos activos |
+| Secondary 500 | `#513ca4` | Gradientes, acentos secundarios |
+| Secondary 600 | `#4c1d95` | Fondos oscuros |
+
+**Gradiente principal**: azul a purpura (135deg) — clase `gradient-primary`
+
+**Fuente**: [Montserrat](https://fonts.google.com/specimen/Montserrat)
+
+---
+
+## Dispositivos Compatibles
+
+La app XuperPlay funciona en los siguientes dispositivos Android:
+
+| Dispositivo | Compatible |
+|---|---|
+| Android TV Box | Si |
+| Smart TV con Android TV | Si |
+| Amazon Fire TV Stick | Si |
+| Xiaomi Mi TV Stick | Si |
+| Celular Android | Si |
+| Tableta Android | Si |
+| Google Chromecast 4 | Si |
+| PC (con emulador) | Si |
+| Roku | No |
+
+---
+
+<div align="center">
+
+Desarrollado con [Astro](https://astro.build/) y [Tailwind CSS](https://tailwindcss.com/) | Deploy en [Vercel](https://vercel.com/)
+
+**XuperPlay** — Tu app de entretenimiento sin limites.
+
+</div>
